@@ -1,0 +1,143 @@
+<app-header></app-header>
+<br><br>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h2 class="text-center">Registration</h2>
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label for="username" class="col-form-label">User Name: </label>
+
+      <input id="username" type="text" formControlName="username" class="form-control" placeholder="User Name">
+      <div *ngIf="profileForm.controls.username.invalid && (profileForm.controls.username.dirty || profileForm.controls.username.touched)" class="text-danger">
+        Username is required.
+      </div>
+  </div>
+
+<br>
+
+<div class="form-group">
+  <label for="usertype">User Type: </label>
+  <select id="usertype" formControlName="usertype" class="form-control" placeholder="User Type">
+    <option value="Owner">Owner</option>
+    <option value="Broker">Broker</option>
+    <option value="Tenant">Tenant</option>
+  </select>
+</div>
+
+<br>
+
+<div class="form-group">
+  <label for="contactno" class="col-form-label">Contact No: </label>
+
+  <input id="contactno" type="text" formControlName="contactno" class="form-control" placeholder="Contact No">
+
+  <div *ngIf="profileForm.controls.contactno.invalid && (profileForm.controls.contactno.dirty || profileForm.controls.contactno.touched)" class="text-danger">
+    Please Enter Valid Contact No.
+  </div>
+</div>
+
+<br>
+
+<div class="form-group">
+  <label for="email" class="col-form-label">Email: </label>
+
+  <input id="email" type="text" formControlName="email" class="form-control" placeholder="Email">
+
+  <div *ngIf="profileForm.controls.email.invalid && (profileForm.controls.email.dirty || profileForm.controls.email.touched)" class="text-danger">
+    Please enter a valid email.
+  </div>
+</div>
+
+<br>
+
+<div class="form-groupr">
+  <label for="addressline1" class="col-form-label">AddressLine1: </label>
+
+  <input id="addressline1" type="text" formControlName="addressline1" class="form-control" placeholder="AddressLine 1">
+
+</div>
+
+<br>
+
+<div class="form-group">
+  <label for="addressline2" class="col-form-label">AddressLine2: </label>
+
+  <input id="addressline2" type="text" formControlName="addressline2" class="form-control" placeholder="AddressLine 2">
+
+</div>
+
+<br>
+
+<div class="form-group">
+  <label for="city" class="col-form-label">City: </label>
+
+  <input id="city" type="text" formControlName="city" class="form-control" placeholder="City">
+  <div *ngIf="(profileForm.controls.city.untouched)" class="text-danger">
+    Please Enter City.
+  </div>
+</div>
+
+<br>
+
+<div class="form-group">
+  <label for="state" class="col-form-label">State: </label>
+
+  <input id="state" type="text" formControlName="state" class="form-control" placeholder="State">
+  <div *ngIf="(profileForm.controls.state.untouched)" class="text-danger">
+    Please Enter State.
+  </div>
+</div>
+
+<br>
+
+<div class="form-group">
+  <label for="pincode" class="col-form-label">Pincode: </label>
+
+  <input id="pincode" type="text" formControlName="pincode" class="form-control" placeholder="Pincode">
+
+  <div *ngIf="profileForm.controls.pincode.invalid && (profileForm.controls.pincode.dirty || profileForm.controls.pincode.touched)" class="text-danger">
+    Please enter a valid pincode.
+  </div>
+</div>
+
+<br>
+
+<div class="form-group">
+  <label for="dateofbirth" class="col-form-label">Date Of Birth: </label>
+
+  <input id="dateofbirth" type="date" formControlName="dateofbirth" class="form-control" placeholder="Date Of Birth">
+
+</div>
+
+<br>
+
+<div class="form-group">
+  <label for="passwordhash" class="col-form-label">Password: </label>
+
+  <input id="passwordhash" type="password" formControlName="passwordhash" class="form-control" placeholder="Password">
+
+  <div *ngIf="profileForm.controls.passwordhash.invalid && (profileForm.controls.passwordhash.dirty || profileForm.controls.passwordhash.touched)" class="text-danger">
+    Please enter a valid password.
+  </div>
+</div>
+
+<br>
+
+<button type="submit" class="btn btn-primary btn-block" [disabled]="!profileForm.valid" style="width: 150px;margin-left:150px">Register</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div *ngIf="registrationSuccess" class="alert alert-success" role="alert">
+  Registration successful! You will be redirected shortly.
+</div>
+
+<br><br>
+<app-footer></app-footer>
+
