@@ -1,0 +1,46 @@
+<app-header></app-header>
+<br><br>
+<body>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h2 class="text-center">Login</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter username">
+              <div *ngIf="loginForm.controls.username.invalid && (loginForm.controls.username.dirty || loginForm.controls.username.touched)" class="text-danger">
+                Username is required.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+              <div *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)" class="text-danger">
+                Password is required.
+              </div>
+            </div><br>
+            <div *ngIf="loginError" class="alert alert-danger">
+              {{ loginError }}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid" style="width: 150px;margin-left: 150px;margin-top: 20px;">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="loginSuccess" class="alert alert-success" role="alert">
+  Login successful!
+</div>
+
+
+<div *ngIf="sessionExpired" class="alert alert-warning">
+  Your session has expired. Please log in again.
+</div>
+
+</body>
+<br><br>
+<app-footer></app-footer>
