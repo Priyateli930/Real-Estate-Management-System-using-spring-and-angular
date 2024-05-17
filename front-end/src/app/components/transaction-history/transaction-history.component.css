@@ -1,0 +1,32 @@
+table {
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px auto; /* top and bottom margin is 20px, left and right margin is auto */
+  margin-bottom: 90px;
+  border: 1px solid #ddd; /* Light grey border */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  border-radius: 15px; /* Rounded border */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+th {
+  background-color: #141f14;
+  color: white;
+}
+.card {
+  border: 1px solid #ddd; /* Light grey border */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  border-radius: 15px; /* Rounded border */
+  height: 200px;
+  text-align: center;
+}
