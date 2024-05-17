@@ -1,20 +1,23 @@
-package com.remsnew.repository;
+package com.remsnew.security;
 
+public class AuthenticationRequest {
+    private String username;
+    public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	private String password;
 
-
-import java.util.Optional;
-
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-import com.remsnew.entity.Users;
-
-@Repository
-public interface UsersRepository extends JpaRepository<Users, Integer>{
-	public Page<Users> findByCity(String city,Pageable pageable);
-	public Users findByEmail(String email);
-	public Optional<Users> findByUserid(int userid);
+    // getters and setters
 }
+
+
+
