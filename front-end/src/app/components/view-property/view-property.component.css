@@ -1,0 +1,63 @@
+.container-fluid {
+  position: relative;
+  height: 100vh; /* This will make the container take up the full height of the viewport */
+  width: 100ch;
+   margin-top: 100px;
+}
+
+.bg-image {
+  background-image: url('https://th.bing.com/th/id/OIP.Brbr4dMOFwP_z6w57Spn8QHaH_?w=144&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7');
+  background-size: cover;
+  background-position: top;
+  height: 600px;
+}
+
+.content {
+  position: absolute;
+  top: 50%; /* This will center the content vertically */
+  left: 50%;
+  /* This will center the content horizontally */
+  transform: translate(-50%, -50%);
+  /* This will center the content */
+  /* Your existing CSS code goes here */
+}
+
+.container {
+  border: 1px solid #f2f2f2; /* This will create a very light grey border */
+}
+
+.modal-backdrop {
+  position: relative;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+/* Add media queries for responsiveness */
+@media (max-width: 992px) {
+  .bg-image {
+    height: 500px; /* Reduce the height of the image */
+  }
+  .form-control {
+    font-size: 14px; /* Reduce the font size of the input fields */
+  }
+}
+
+@media (max-width: 768px) {
+  .bg-image {
+    height: 400px; /* Further reduce the height of the image */
+  }
+  .form-control {
+    font-size: 12px; /* Further reduce the font size of the input fields */
+  }
+}
+
+@media (max-width: 576px) {
+  .bg-image {
+    height: 300px; /* Further reduce the height of the image */
+  }
+  .form-control {
+    font-size: 10px; /* Further reduce the font size of the input fields */
+  }
+}
