@@ -1,0 +1,187 @@
+<app-header></app-header>
+<br>
+
+<!-- <nav aria-label="Page navigation example" style="margin-top: 80px;margin-left: 50px;">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="pageNo === 0">
+      <a class="page-link" href="javascript:void(0)" (click)="prevPage()">Previous</a>
+    </li>
+    <li class="page-item" *ngFor="let i of [].constructor(totalPages); let page = index" [class.active]="page === pageNo">
+      <a class="page-link" href="javascript:void(0)" (click)="goToPage(page)">{{page + 1}}</a>
+    </li>
+    <li class="page-item" [class.disabled]="pageNo === totalPages - 1">
+      <a class="page-link" href="javascript:void(0)" (click)="nextPage()">Next</a>
+    </li>
+  </ul>
+</nav> -->
+
+<br>
+
+<div class="container mt-5" *ngIf="!empty" >
+  <div class="row">
+    <!-- Property Cards -->
+    <div class="col-md-4" *ngFor="let property of uploadedProperties" style="margin-top: 10px;">
+      <div class="card h-100 shadow">
+        <!-- Carousel -->
+        <div id="carouselExampleIndicators{{property.propertyid}}" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li *ngFor="let image of property.images; let i = index" [attr.data-target]="'#carouselExampleIndicators' + property.propertyid" [attr.data-slide-to]="i" [class.active]="i == 0"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div *ngFor="let image of property.images; let i = index" class="carousel-item" [class.active]="i == 0">
+              <img class="d-block w-100" [src]="image.propImages" alt="Slide {{i+1}}">
+            </div>
+          </div>
+          <a class="carousel-control-prev" [attr.href]="'#carouselExampleIndicators' + property.propertyid" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" [attr.href]="'#carouselExampleIndicators' + property.propertyid" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <!-- End of Carousel -->
+        <div class="card-body">
+          <h5 class="card-title">{{ property.addressline1 }}, {{ property.city }}</h5>
+          <p class="card-text">
+            <strong>Address Line 2:</strong> {{ property.addressline2 }}<br>
+            <strong>State:</strong> {{ property.state }}<br>
+            <strong>Property Type:</strong> {{ property.propertytype }}<br>
+            <strong>Price:</strong> {{ property.price }}<br>
+            <strong>Size:</strong> {{ property.size }}<br>
+            <strong>Property Status:</strong> {{ property.propstatus }}
+          </p>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPropertyModal" (click)="editProperty(property)" style="width: 140px;margin-left: 10px;background-color: black;">
+            Edit
+          </button>
+          <button class="btn btn-secondary" (click)="deleteProperty(property.propertyid)" style="width: 140px;margin-left: 10px;">Delete</button><br>
+          <button *ngIf="userType === 'Owner' || userType === 'Broker'" [disabled]="property.userHasTransaction" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addTransactionModal" (click)="prepareForTransaction(property)" style="width: 140px;margin-left: 10px;margin-top: 10px;">Add Transaction</button>
+          <button *ngIf="userType === 'Tenant'" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addRatingModal" (click)="prepareForRating(property)" style="width: 140px;margin-left: 10px;">Add Rating</button>
+          <!-- Update Images Button -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="newcard" *ngIf="empty">
+<h3 style="margin-top: 70px;">You Havent Uploaded Any Properties Yet!</h3>
+</div>
+
+<!-- code for the modal -->
+<div class="modal fade" id="editPropertyModal" tabindex="-1" aria-labelledby="editPropertyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPropertyModalLabel">Edit Property</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Add your form here -->
+        <form #editForm="ngForm" (ngSubmit)="onSubmit(editForm)">
+          <div class="mb-3">
+            <label for="addressline1" class="form-label">Address Line 1</label>
+            <input type="text" class="form-control" id="addressline1" [(ngModel)]="propertyToEdit.addressline1" name="addressline1" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="addressline2" class="form-label">Address Line 2</label>
+            <input type="text" class="form-control" id="addressline2" [(ngModel)]="propertyToEdit.addressline2" name="addressline2" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" [(ngModel)]="propertyToEdit.city" name="city" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="state" class="form-label">State</label>
+            <input type="text" class="form-control" id="state" [(ngModel)]="propertyToEdit.state" name="state" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="pincode" class="form-label">Pincode</label>
+            <input type="text" class="form-control" id="pincode" [(ngModel)]="propertyToEdit.pincode" name="pincode" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="size" class="form-label">Size</label>
+            <input type="text" class="form-control" id="size" [(ngModel)]="propertyToEdit.size" name="size" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" class="form-control" id="price" [(ngModel)]="propertyToEdit.price" name="price" required>
+          </div>
+
+
+
+          <div class="form-group mb-3">
+            <label for="propertyType">Property Type</label>
+            <select class="form-control" id="propertytype" name="propertytype" [(ngModel)]="propertyToEdit.propertytype">
+              <option *ngFor="let type of propertyTypes">{{type}}</option>
+            </select>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="propertyStatus">Property Status</label>
+            <select class="form-control" id="propstatus" name="propstatus" [(ngModel)]="propertyToEdit.propstatus">
+              <option *ngFor="let status of propertyStatus">{{status}}</option>
+            </select>
+          </div>
+
+
+
+
+          <!-- Add more form fields as needed -->
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<app-footer></app-footer>
+
+
+
+<!-- code for the add transaction modal -->
+<div class="modal fade" id="addTransactionModal" tabindex="-1" aria-labelledby="addTransactionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTransactionModalLabel">Add Transaction</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="transactionForm" (ngSubmit)="onSubmitTransaction()">
+          <div class="form-group">
+            <label for="buyerEmail">Buyer Email:</label>
+            <input type="email" id="buyerEmail" formControlName="buyerEmail" class="form-control" placeholder="Enter buyer's email">
+          </div>
+
+          <div class="form-group">
+            <label for="saleRentPrice">Sale/Rent Price:</label>
+            <input type="number" id="saleRentPrice" formControlName="saleRentPrice" class="form-control" placeholder="Enter sale/rent price">
+          </div>
+
+          <div class="form-group">
+            <label for="transactionDate">Transaction Date:</label>
+            <input type="date" id="transactionDate" formControlName="transactionDate" class="form-control">
+          </div>
+
+          <button type="submit" [disabled]="!transactionForm.valid" class="btn btn-primary btn-block">Submit Transaction</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
