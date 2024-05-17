@@ -1,0 +1,37 @@
+.container {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.btn-primary {
+
+  color: #fff;
+  margin-left: 80px;
+  width: 300px;
+}
+
+.col-md-6 {
+  margin: auto;
+}
+
+form {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.15);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: -200px;
+}
+
+
