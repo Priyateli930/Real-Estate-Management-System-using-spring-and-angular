@@ -1,0 +1,34 @@
+.masthead {
+  height: 100vh;
+  min-height: 500px;
+  margin-top: 60px;
+  background-image: url('https://th.bing.com/th/id/OIP.oOsQopkRjtjtilAGwD_OFAHaFD?w=267&h=183&c=7&r=0&o=5&dpr=1.5&pid=1.7'), url('https://th.bing.com/th/id/OIP.VNLgys-hj52d28TTTmINNQHaEq?w=270&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7'), url('https://th.bing.com/th/id/OIP.vRcvuiIQcUEn6U8y55LSmwHaFT?w=253&h=181&c=7&r=0&o=5&dpr=1.5&pid=1.7'), url('https://th.bing.com/th/id/OIP.xdQqHAALc9-eHJaZg527egHaE8?w=257&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7'), url('https://th.bing.com/th/id/OIP.oaUdoE1pdp2LoYdhSMTCuQHaEO?w=280&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7'), url('https://th.bing.com/th/id/OIP.iD9gsM0RC59KntwNSEzlWAAAAA?w=273&h=184&c=7&r=0&o=5&dpr=1.5&pid=1.7');
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: left top, center top, right top, left bottom, center bottom, right bottom;
+  background-size: 33.33% 50%; /* This will divide the container into 6 equal parts */
+}
+
+
+/* For medium devices */
+@media (max-width: 768px) {
+.masthead {
+    background-size: 50% 50%; /* This will divide the container into 4 parts */
+    background-position: left top, right top, left bottom, right bottom; /* Only 4 images will be shown */
+}
+}
+
+/* For small devices */
+@media (max-width: 576px) {
+.masthead {
+    background-size: 100% 100%; /* One image will cover the whole container */
+    background-position: center center; /* Only 1 image will be shown */
+}
+}
+
+
+.transparent-box {
+  display: inline-block;
+  padding: 40px;
+  background-color:  rgba(240, 246, 248, 0.3); /* This is a transparent beige color */
+  border-radius: 10px;
+}
