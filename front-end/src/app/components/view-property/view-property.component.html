@@ -1,0 +1,156 @@
+
+<div class="d-flex flex-column min-vh-100">
+  <app-header></app-header>
+  <div class="container-fluid bg-image flex-grow-1">
+    <div class="content">
+      <!-- Your existing HTML code goes here -->
+      <!-- ... -->
+      <div class="container-fluid" >
+        <form (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- City Input -->
+<label>City</label>
+            <input type="text" class="form-control" placeholder="Enter City" [(ngModel)]="city" name="city">
+          </div>
+          <div class="col-md-6">
+            <!-- Budget Range -->
+            <label>Minimum Budget</label>
+            <input type="range" class="form-control" min="0" max="1000000" [(ngModel)]="minPrice"  name="minPrice"><br>
+            <label>{{minPrice}}</label><br>
+            <label>Maximum Budget</label>
+            <input type="range" class="form-control" min="0" max="100000000" [(ngModel)]="maxPrice" name="maxPrice">
+            <label>{{maxPrice}}</label>
+          </div>
+        </div><br><br>
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Property Type Dropdown -->
+            <label>Property Type</label>
+            <select class="form-control" [(ngModel)]="propertyType" name="propertyType" >
+              <option>Flat</option>
+              <option>Villa</option>
+              <option>Land</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <!-- Property Status Dropdown -->
+            <label>Property Status</label>
+            <select class="form-control" [(ngModel)]="propertyStatus" name="propertyStatus" >
+              <option>Available</option>
+              <option>Rented</option>
+              <option>Sold</option>
+            </select>
+          </div>
+        </div><br>
+        <button type="submit" class="btn btn-secondary" style="width: 300px; margin-left: 250px;">Submit</button>
+      </form>
+      <br><br>
+      <!-- Add this after your form -->
+
+      <nav aria-label="Page navigation example" style="margin-top: 300px;"  *ngIf="!noPropertiesFound">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="pageNo === 0">
+            <a class="page-link" href="javascript:void(0)" (click)="prevPage()">Previous</a>
+          </li>
+          <li class="page-item" *ngFor="let i of [].constructor(totalPages); let page = index" [class.active]="page === pageNo">
+            <a class="page-link" href="javascript:void(0)" (click)="goToPage(page)">{{page + 1}}</a>
+          </li>
+          <li class="page-item" [class.disabled]="pageNo === totalPages - 1">
+            <a class="page-link" href="javascript:void(0)" (click)="nextPage()">Next</a>
+          </li>
+        </ul>
+      </nav>
+<br>
+
+<div *ngIf="noPropertiesFound" class="alert alert-info"  style="margin-top: 300px" >
+  No Properties Found For Provided Filters!!
+</div>
+<br><br>
+<div class="mt-5" *ngIf="!noPropertiesFound">
+  <div class="row container" style="margin-top: 30px;">
+    <!-- Property Cards -->
+    <div class="col-md-4" *ngFor="let property of properties" style="margin-top: 10px;">
+      <div class="card h-100 shadow" >
+        <!-- Carousel -->
+        <div id="carouselExampleIndicators{{property.propertyid}}" class="carousel slide" data-ride="carousel" data-interval="2000">
+          <ol class="carousel-indicators">
+            <li *ngFor="let image of property.images; let i = index" [attr.data-target]="'#carouselExampleIndicators' + property.propertyid" [attr.data-slide-to]="i" [class.active]="i == 0"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div *ngFor="let image of property.images; let i = index" class="carousel-item" [class.active]="i == 0">
+              <img class="d-block w-100" [src]="image.propImages" alt="Slide {{i+1}}">
+            </div>
+
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators{{property.propertyid}}" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators{{property.propertyid}}" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+
+        </div>
+        <!-- End of Carousel -->
+        <div class="card-body">
+          <h5 class="card-title">{{property.addressline1}}, {{property.city}}</h5>
+          <p class="card-text">Owner / Broker Details: Name: {{property.owner?.username || property.agent?.username}}, Type: {{property.owner?.usertype || property.agent?.usertype}}</p>
+          <p class="card-text">Owner / Broker Contact: Contact: {{property.owner?.contactno || property.agent?.contactno}}, Email: {{property.owner?.email || property.agent?.email}}</p>
+
+        </div>
+
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRatingModal" *ngIf="userType === 'Tenant'" (click)="prepareForRating(property)" style="width: 200px; margin-left: 20px; margin-right: 20px;">Add Rating</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- code for the add rating modal -->
+<div class="modal fade" id="addRatingModal" tabindex="-1" aria-labelledby="addRatingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addRatingModalLabel">Add Rating</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="ratingForm" (ngSubmit)="onSubmitRating()">
+          <div class="form-group">
+            <label for="ratingValue">Rating Value (out of 5):</label>
+            <input type="number" id="ratingValue" formControlName="ratingValue" class="form-control" placeholder="Enter rating value" min="1" max="5">
+          </div>
+
+          <div class="form-group">
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" formControlName="feedback" class="form-control" placeholder="Enter feedback"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfFeedback">Date of Feedback:</label>
+            <input type="date" id="dateOfFeedback" formControlName="dateOfFeedback" class="form-control">
+          </div>
+<br>
+          <button type="submit" [disabled]="!ratingForm.valid" class="btn btn-primary btn-block" style="margin-left: 160px;">Submit Rating</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- <app-footer></app-footer> -->
+
