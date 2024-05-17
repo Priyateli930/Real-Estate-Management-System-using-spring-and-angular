@@ -1,0 +1,51 @@
+<app-header></app-header><br><br>
+
+<div class="container mt-5">
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-group p-4 shadow-lg rounded">
+    <h3 class="d-flex justify-content-center align-items-center">Contact Assistance</h3><br><br>
+    <div class="form-group row justify-content-center">
+      <label for="name" class="col-sm-2 col-form-label">Name: </label>
+      <div class="col-sm-6">
+        <input id="name" type="text" formControlName="name" class="form-control">
+      </div>
+    </div>
+<br>
+    <div class="form-group row justify-content-center">
+      <label for="email" class="col-sm-2 col-form-label">Email: </label>
+      <div class="col-sm-6">
+        <input id="email" type="email" formControlName="email" class="form-control">
+      </div>
+    </div>
+<br>
+    <div class="form-group row justify-content-center">
+      <label for="contact" class="col-sm-2 col-form-label">Contact: </label>
+      <div class="col-sm-6">
+        <input id="contact" type="text" formControlName="contact" class="form-control">
+      </div>
+    </div>
+<br>
+    <div class="form-group row justify-content-center">
+      <label for="subject" class="col-sm-2 col-form-label">Subject: </label>
+      <div class="col-sm-6">
+        <input id="subject" type="text" formControlName="subject" class="form-control">
+      </div>
+    </div>
+<br>
+    <div class="form-group row justify-content-center">
+      <label for="message" class="col-sm-2 col-form-label">Message: </label>
+      <div class="col-sm-6">
+        <textarea id="message" formControlName="message" class="form-control"></textarea>
+      </div>
+    </div>
+<br>
+    <div class="form-group row justify-content-center">
+      <div class="col-md-6">
+        <button type="submit" [disabled]="!contactForm.valid" class="btn btn-secondary btn-block align-items-center" style="width: 280px;margin-left: 50px;">Submit</button>
+      </div>
+    </div>
+<br><br>
+  </form>
+</div><br><br><br>
+
+<app-footer></app-footer>
