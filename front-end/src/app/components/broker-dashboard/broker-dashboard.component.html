@@ -1,0 +1,33 @@
+
+<app-header></app-header><br><br><br>
+<div>
+  <div id="mySidenav" class="sidenav" style="margin-top: 40px;">
+
+    <div class="d-flex justify-content-center align-items-center">
+      <img src="https://th.bing.com/th/id/OIP.m35QU85Ydsud_avq6BJxSgHaHa?w=175&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" class="rounded-circle" width="80" height="80" style="margin-top: 20px; margin-left: -40px;"/><br><br>
+      <p style="color: azure;margin-top: 40px;margin-left: 20px;">
+        {{ userName }}
+      </p>
+    </div>
+    <!-- <p style="color: white; margin-left: 112px; margin-top: 10px;">{{ userName }}</p> -->
+    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()" style="margin-top: 10px;">&times;</a><br><br>
+    <a href="#" style="font-size: 20px;" routerLink="/add-new-property"><i class="fas fa-plus-square"></i> Add New Property</a>
+    <a href="#" style="font-size: 20px;" routerLink="/view-property" ><i class="fas fa-eye"></i> View Properties</a>
+    <a href="#" style="font-size: 20px;" routerLink="/uploaded-property"><i class="fas fa-upload"></i>  Uploaded Properties</a>
+    <a href="#" style="font-size: 20px;" routerLink="/transaction-history"><i class="fa fa-history" aria-hidden="true"></i> Transaction History</a>
+    <!-- <a href="#" style="font-size: 20px;" routerLink="/login" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a> -->
+  </div>
+  <span style="font-size:30px;cursor:pointer;margin-left:10px" (click)="openNav()">&#9776;</span>
+</div>
+
+<div class="main-content" >
+  <!-- Add your main content here -->
+  <!-- <h2>Owner Dashboard</h2> -->
+  <!-- <app-view-property></app-view-property> -->
+  <app-mydetails></app-mydetails>
+  <router-outlet></router-outlet>
+
+</div>
+
+
+<app-footer></app-footer>
