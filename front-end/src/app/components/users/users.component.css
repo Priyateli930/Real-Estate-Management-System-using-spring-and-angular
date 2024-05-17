@@ -1,0 +1,19 @@
+.container {
+  margin-top: 50px;
+  background-image: url('../../../assets/signup3.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.card {
+  border: 1px solid #ddd; /* Light grey border */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  border-radius: 15px; /* Rounded border */
+}
+
+.card-body {
+  padding: 20px;
+}
+
+
