@@ -1,0 +1,45 @@
+<body>
+<div class="container" *ngIf="user">
+  <div class="row">
+    <!-- User Details Table -->
+    <div class="col-md-12">
+      <div class="table-responsive">
+      <table class="table table-striped center" style="height: 400px; width: 600px;margin-top: 20px;">
+        <thead>
+          <tr>
+            <th colspan="2" style="text-align: center;"><h3>My Details</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Username</strong></td>
+            <td>{{ user.username }}</td>
+          </tr>
+          <tr>
+            <td><strong>Email</strong></td>
+            <td>{{ user.email }}</td>
+          </tr>
+          <tr>
+            <td><strong>Contact</strong></td>
+            <td>{{ user.contactno }}</td>
+          </tr>
+          <tr>
+            <td><strong>City</strong></td>
+            <td>{{ user.city }}</td>
+          </tr>
+          <tr>
+            <td><strong>User Type</strong></td>
+            <td>{{ user.usertype }}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- Image -->
+    <!-- <div class="col-md-5">
+      <img src="https://th.bing.com/th/id/OIP.R5QRTF-yWMqcflPzFDDmrgHaE8?w=245&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" class="img-fluid" alt="Professional Person" style="height: 400px;width: 500px;margin-top: -20px;">
+    </div> -->
+  </div>
+</div>
+</body>
