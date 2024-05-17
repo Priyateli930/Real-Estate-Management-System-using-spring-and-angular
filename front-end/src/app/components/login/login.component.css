@@ -1,0 +1,19 @@
+.container {
+  margin-top: 50px;
+}
+
+.card {
+  border: 1px solid #ddd; /* Light grey border */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  border-radius: 15px; /* Rounded border */
+  margin-top: 50px;
+}
+
+.card-body {
+  padding: 20px;
+}
+body {
+  background-image: url('../../../assets/login1.jpg'); /* Update with your image path */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
