@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  margin: auto;
+}
+
+.card {
+  margin-top: 20px;
+}
+
+table{
+  border: 1px solid #ddd; /* Light grey border */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  border-radius: 15px; /* Rounded border */
+  width: 100%;
+  margin-left: 150px;
+}
+
+body{
+  background-image: url('../../../assets/mydetails3.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  /* min-height: 100vh; */
+  margin-left: 20px;
+  margin-top: -50px;
+}
+
+.center {
+
+  justify-content: center;
+  align-items: center;
+
+}
